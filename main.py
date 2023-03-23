@@ -1,4 +1,4 @@
-# FICHIER DU GROUPE AMINE, LENNY RASSIM, JEU DU PENDU
+# FICHIER DU GROUPE AMINA, ANDREA, LENNY, RASSIM, JEU DU PENDU
 # --------------------------------------
 # PARTIE LENNY
 import tkinter as tk
