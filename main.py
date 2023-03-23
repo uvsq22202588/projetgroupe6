@@ -17,19 +17,17 @@ fenetre_menu.grid_rowconfigure(3, weight=1)
 font_label = font.Font(size=20)
 font_bouton = font.Font(size=15)
 
-def jeu():
-    global jeu
-    jeu = True
-    fenetre_menu.destroy()
-
-def quitter():
+def je(n = None):
+    if n != 1:
+        global jeu
+        jeu = True
     fenetre_menu.destroy()
 
 Label_1 = tk.Label(fenetre_menu, text="Jeu du Pendu", fg = "black")
 Label_1['font'] = font_label
 
-bouton_jouer = tk.Button(fenetre_menu, text="Jouer", command=lambda : jeu())
-bouton_quitter = tk.Button(fenetre_menu, text="Quitter", command=lambda : quitter())
+bouton_jouer = tk.Button(fenetre_menu, text="Jouer", command=lambda : je())
+bouton_quitter = tk.Button(fenetre_menu, text="Quitter", command=lambda : je(1))
 bouton_jouer['font'] = font_bouton
 bouton_quitter['font'] = font_bouton
 
@@ -42,7 +40,7 @@ fenetre_menu.mainloop()
 
 
 
-if jeu:
+if jeu == True:
     liste = ['AIGLE','BUSE','FAUCON','MILAN'] # avec les listes d'amina
 
     def mots(liste):
