@@ -110,7 +110,11 @@ canvas_personnage = tk.Canvas(fenetre, width=500, height=400, bg="cyan")
 liste_ligne=[[100,400,400,400],[150,400,150,150],[150,150,300,150],[200,150,150,200],[300,150,300,200],[325,250,275,200],[ 300,250,300,300],[300,275,325,275],[275,275,325,275],   [300,300,325,320],[300,300,275,320]]
 
 canvas_personnage.bind("<Button-1>",ecrit_les_coords)
-
+def creer_lignes(liste_ligne, index, canevas):
+    x1, y1, x2, y2 = liste_ligne[index]
+    if index != 5:
+        canevas.create_line(x1, y1, x2, y2, fill="black")
+    else: canevas.create_oval(x1, y1, x2, y2, outline="black")
 
 boutonA.grid(column=1,row=0)
 boutonB.grid(column=1,row=1)
