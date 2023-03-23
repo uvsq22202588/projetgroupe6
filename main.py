@@ -1,6 +1,81 @@
 # FICHIER DU GROUPE AMINA, ANDREA, LENNY, RASSIM, JEU DU PENDU
 # --------------------------------------
 # PARTIE LENNY
+from random import *
+
+liste = ['aigle','buse','faucon','milan'] # avec les listes d'amina
+def mots(liste):
+    global mot
+    mot = choice(liste)
+    print (mot)
+
+mots(liste)
+
+
+def tiret(mot):
+    global affichage
+    affichage=[]
+    for i in mot:
+        affichage.append('_')
+    print(affichage)
+    
+tiret(mot)
+
+
+boutonA=tk.Button(fenetre,text="A",command=lambda : "A")
+boutonB=tk.Button(fenetre,text="B",command=lambda : "B")
+boutonC=tk.Button(fenetre,text="C",command=lambda : "C")
+boutonD=tk.Button(fenetre,text="D",command=lambda : "D")
+boutonE=tk.Button(fenetre,text="E",command=lambda : "E")
+boutonF=tk.Button(fenetre,text="F",command=lambda : "F")
+boutonG=tk.Button(fenetre,text="G",command=lambda : "G")
+boutonH=tk.Button(fenetre,text="H",command=lambda : "H")
+boutonI=tk.Button(fenetre,text="I",command=lambda : "I")
+boutonJ=tk.Button(fenetre,text="J",command=lambda : "J")
+boutonK=tk.Button(fenetre,text="K",command=lambda : "K")
+boutonL=tk.Button(fenetre,text="L",command=lambda : "L")
+boutonM=tk.Button(fenetre,text="M",command=lambda : "M")
+boutonN=tk.Button(fenetre,text="N",command=lambda : "N")
+boutonO=tk.Button(fenetre,text="O",command=lambda : "O")
+boutonP=tk.Button(fenetre,text="P",command=lambda : "P")
+boutonQ=tk.Button(fenetre,text="Q",command=lambda : "Q")
+boutonR=tk.Button(fenetre,text="R",command=lambda : "R")
+boutonS=tk.Button(fenetre,text="S",command=lambda : "S")
+boutonT=tk.Button(fenetre,text="T",command=lambda : "T")
+boutonU=tk.Button(fenetre,text="U",command=lambda : "U")
+boutonV=tk.Button(fenetre,text="V",command=lambda : "V")
+boutonW=tk.Button(fenetre,text="W",command=lambda : "W")
+boutonX=tk.Button(fenetre,text="X",command=lambda : "X")
+boutonY=tk.Button(fenetre,text="Y",command=lambda : "Y")
+boutonZ=tk.Button(fenetre,text="Z",command=lambda : "Z")
+
+boutonA.grid(column=1,row=0)
+boutonB.grid(column=1,row=1)
+boutonC.grid(column=1,row=2)
+boutonD.grid(column=1,row=3)
+boutonE.grid(column=1,row=4)
+boutonF.grid(column=1,row=5)
+boutonG.grid(column=1,row=6)
+boutonH.grid(column=1,row=7)
+boutonI.grid(column=1,row=8)
+boutonJ.grid(column=1,row=9)
+boutonK.grid(column=2,row=0)
+boutonL.grid(column=2,row=1)
+boutonM.grid(column=2,row=2)
+boutonN.grid(column=2,row=3)
+boutonO.grid(column=2,row=4)
+boutonP.grid(column=2,row=5)
+boutonQ.grid(column=2,row=6)
+boutonR.grid(column=2,row=7)
+boutonS.grid(column=2,row=8)
+boutonT.grid(column=2,row=9)
+boutonU.grid(column=3,row=0)
+boutonV.grid(column=3,row=1)
+boutonW.grid(column=3,row=2)
+boutonX.grid(column=3,row=3)
+boutonY.grid(column=3,row=4)
+boutonZ.grid(column=3,row=5) 
+
 import tkinter as tk
 
 erreur = 0
