@@ -4,5 +4,5 @@ Amina Yous
 Lenny Lemoussu
 Andréa Cuvelier
 Rassim Benbetka
-\n
+
 https://github.com/uvsq22202588/projetgroupe6/
