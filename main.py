@@ -9,7 +9,8 @@ import tkinter.font as font
 jeu = False
 
 fenetre_menu = tk.Tk()
-fenetre_menu.geometry("600x500+500+200")
+messagebox.showinfo(fenetre_menu,message="Si vous êtes sur mac, il est possible que l'affichage soit un peu moche du style tout noir")
+fenetre_menu.geometry("800x500+400+200")
 fenetre_menu.grid_columnconfigure(0, weight=1)
 fenetre_menu.grid_columnconfigure(1, weight=1)
 fenetre_menu.grid_columnconfigure(2, weight=1)
@@ -116,15 +117,26 @@ if jeu == True:
 
     fenetre = tk.Tk()
     fenetre.title("pendu")
-    fenetre.geometry("600x500+500+200")
+    fenetre.geometry("800x500+400+200")
 
     mot_pointille = tiret()
 
     canvas_personnage = tk.Canvas(fenetre, width=500, height=400, bg="cyan")
 
+    lettre_deja_donne = []
+    lettre_deja_donne2 = []
     label_erreur = tk.Label(fenetre, text="Vous avez fait "+str(erreur)+" erreur(s)")
+    label_lettre_deja_utilise = tk.Label(fenetre, text="Vous n'avez utilisé aucune lettre : ")
 
     reussite = 0
+
+
+    def change_label_deja(lett):
+        global lettre_deja_donne2
+        cdc = ''
+        for lettre in lettre_deja_donne2:
+            cdc = cdc + lettre + ", " 
+        label_lettre_deja_utilise.config(text="Vous avez déjà utilisé les lettres : "+cdc)
 
     def change_label_erreur():
         global erreur
@@ -134,7 +146,6 @@ if jeu == True:
 
 
     change_label_erreur()
-    lettre_deja_donne = []
 
     liste_ligne=[[100,400,400,400],[150,400,150,150],[150,150,300,150],[200,150,150,200],[300,150,300,200],[325,250,275,200],[ 300,250,300,300],[300,275,325,275],[275,275,325,275],   [300,300,325,320],[300,300,275,320]]
 
@@ -160,6 +171,15 @@ if jeu == True:
             mot_pointille_shw = mot_pointille_shw+' '+mot[i]
         label_pointille.config(text=mot_pointille_shw)
 
+    nb_lettre=0
+    l_rien=[]
+    for i in range(len(mot)):
+        if not(mot[i] in l_rien):
+            l_rien.append(mot[i])
+            nb_lettre+=1
+
+
+
     def lettre_dans_le_mot_ou_erreur(lettre):
         global mot
         global mot_pointille
@@ -168,11 +188,15 @@ if jeu == True:
         global canvas_personnage
         global reussite
         global lettre_deja_donne
+        global nb_lettre
 
         if lettre in mot:
             for i in range(len(mot)):
                 if mot[i] == lettre:
                     mot_pointille[i] = lettre
+            if not(lettre in lettre_deja_donne2):
+                lettre_deja_donne2.append(lettre)
+            change_label_deja(lettre)
             #print(mot_pointille)
             if not (lettre in lettre_deja_donne):
                 change_label_pointille(mot_pointille)
@@ -181,13 +205,15 @@ if jeu == True:
                 #print(reussite)
                 #print(mot)
         
-            if reussite == len(mot):
+            if reussite == nb_lettre:
                 messagebox.showinfo(fenetre,message="Vous avez gagné !")
                 fenetre.destroy()
         
 
         else: 
-            
+            if not(lettre in lettre_deja_donne2):
+                lettre_deja_donne2.append(lettre)
+            change_label_deja(lettre)
             print("Faux")
             if erreur >= 11:
                 messagebox.showinfo(fenetre,message="Vous avez perdu !")
@@ -275,7 +301,7 @@ if jeu == True:
     canvas_personnage.grid(row=0, column=0, rowspan=10)
     label_erreur.grid(row=10,column=0)
     label_pointille.grid(row = 11, column=0)
-
+    label_lettre_deja_utilise.grid(row = 11, column=1, columnspan=3)
 
     fenetre.mainloop()
     #
