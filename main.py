@@ -10,24 +10,33 @@ jeu = False
 
 fenetre_menu = tk.Tk()
 fenetre_menu.geometry("600x500+500+200")
+fenetre_menu.grid_columnconfigure(0, weight=1)
 fenetre_menu.grid_columnconfigure(1, weight=1)
+fenetre_menu.grid_columnconfigure(2, weight=1)
+fenetre_menu.grid_columnconfigure(3, weight=1)
 fenetre_menu.grid_rowconfigure(1, weight=1)
 fenetre_menu.grid_rowconfigure(2, weight=1)
 fenetre_menu.grid_rowconfigure(3, weight=1)
 fenetre_menu.grid_rowconfigure(4, weight=1)
 font_label = font.Font(size=20)
 font_bouton = font.Font(size=15)
+font_label2 = font.Font(size=16)
+difficulte = 0
 
 def je(n = None):
+    global difficulte
     if n != 1:
         global jeu
         jeu = True
+        difficulte=scroller.get()
     fenetre_menu.destroy()
 
 Label_1 = tk.Label(fenetre_menu, text="Jeu du Pendu", fg = "black")
 Label_1['font'] = font_label
+Label_2 = tk.Label(fenetre_menu, text="difficulté :")
+Label_2['font'] = font_label2
 
-scroller=tk.Scale(fenetre_menu, from_=0, to=8, orient="horizontal")
+scroller=tk.Scale(fenetre_menu ,from_=0, to=8, orient="horizontal")
 
 
 bouton_jouer = tk.Button(fenetre_menu, text="Jouer", command=lambda : je())
@@ -35,9 +44,10 @@ bouton_quitter = tk.Button(fenetre_menu, text="Quitter", command=lambda : je(1))
 bouton_jouer['font'] = font_bouton
 bouton_quitter['font'] = font_bouton
 
-Label_1.grid(row = 1, column = 1, columnspan = 2)
+Label_1.grid(row = 1, column = 1)
 bouton_jouer.grid(row = 2, column = 1)
 bouton_quitter.grid(row = 3, column = 1)
+Label_2.grid(row=4, column=0)
 scroller.grid(row=4, column=1)
 
             
@@ -69,10 +79,10 @@ if jeu == True:
 
     liste_liste= [LISTE_3_LETTRES,LISTE_4_LETTRES,LISTE_4_LETTRES,LISTE_6_LETTRES,LISTE_7_LETTRES,LISTE_8_LETTRES,LISTE_9_LETTRES,LISTE_10_LETTRES,LISTE_11_LETTREETPLUS]
     def choisirliste(liste,entier):
-       return liste[entier+1]
+       return liste[entier]
     
-    difficulte=scroller.get()+3
-    liste= choisirliste(liste_liste, difficulte)
+    
+    liste = choisirliste(liste_liste, difficulte)
 
 
     def mots(liste):
@@ -171,6 +181,10 @@ if jeu == True:
                 #print(reussite)
                 #print(mot)
         
+            if reussite == len(mot):
+                messagebox.showinfo(fenetre,message="Vous avez gagné !")
+                fenetre.destroy()
+        
 
         else: 
             
@@ -181,10 +195,6 @@ if jeu == True:
             else: 
                 erreur +=1
                 creer_lignes(liste_ligne, erreur, canvas_personnage)
-        
-        if reussite == len(mot):
-            messagebox.showinfo(fenetre,message="Vous avez gagné !")
-            fenetre.destroy()
 
 
 
