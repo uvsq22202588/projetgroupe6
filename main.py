@@ -1,25 +1,23 @@
 # FICHIER DU GROUPE AMINA, ANDREA, LENNY, RASSIM, JEU DU PENDU
 # --------------------------------------
 # PARTIE LENNY
-from random import *
+from random import randint
 
 liste = ['aigle','buse','faucon','milan'] # avec les listes d'amina
+
 def mots(liste):
+    element = randint(0,len(liste)-1)
+    mot = liste[element]
+    return mot
+
+mot = mots(liste)
+
+def tiret():
     global mot
-    mot = choice(liste)
-    print (mot)
-
-mots(liste)
-
-
-def tiret(mot):
     affichage=[]
-    for i in mot:
+    for i in range(len(mot)):
         affichage.append('_')
     return affichage
-    
-tiret(mot)
-
 
 import tkinter as tk
 
@@ -37,8 +35,9 @@ def ecrit_les_coords(evt):
 fenetre = tk.Tk()
 fenetre.title("pendu")
 fenetre.geometry("900x700")
-mot = mots(liste)
-mot_pointille = tiret(mot)
+
+mot_pointille = tiret()
+
 label_erreur = tk.Label(fenetre, text="Vous avez fait "+str(erreur)+" erreur(s)")
 
 
@@ -60,8 +59,8 @@ def lettre_dans_le_mot_ou_erreur(lettre):
         return True
     else: 
         if erreur >= 12:
-            tk.messagebox.M
-        erreur +=1
+            #tk.messagebox.M
+          erreur +=1
         
 boutonA=tk.Button(fenetre,text="A",command=lettre_dans_le_mot_ou_erreur("A"))
 boutonB=tk.Button(fenetre,text="B",command=lettre_dans_le_mot_ou_erreur("B"))
@@ -140,7 +139,7 @@ boutonX.grid(column=3,row=3)
 boutonY.grid(column=3,row=4)
 boutonZ.grid(column=3,row=5) 
 
-canvas_personnage.grid(row=0, column=0, rowspan=9, columnspan=3)
+canvas_personnage.grid(row=0, column=0, rowspan=10)
 label_erreur.grid(row=10,column=0)
 fenetre.mainloop()
 #
