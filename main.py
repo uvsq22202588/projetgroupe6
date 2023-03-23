@@ -14,6 +14,7 @@ fenetre_menu.grid_columnconfigure(1, weight=1)
 fenetre_menu.grid_rowconfigure(1, weight=1)
 fenetre_menu.grid_rowconfigure(2, weight=1)
 fenetre_menu.grid_rowconfigure(3, weight=1)
+fenetre_menu.grid_rowconfigure(4, weight=1)
 font_label = font.Font(size=20)
 font_bouton = font.Font(size=15)
 
@@ -26,6 +27,9 @@ def je(n = None):
 Label_1 = tk.Label(fenetre_menu, text="Jeu du Pendu", fg = "black")
 Label_1['font'] = font_label
 
+scroller=tk.Scale(fenetre_menu, from_=0, to=8, orient="horizontal")
+
+
 bouton_jouer = tk.Button(fenetre_menu, text="Jouer", command=lambda : je())
 bouton_quitter = tk.Button(fenetre_menu, text="Quitter", command=lambda : je(1))
 bouton_jouer['font'] = font_bouton
@@ -34,6 +38,7 @@ bouton_quitter['font'] = font_bouton
 Label_1.grid(row = 1, column = 1, columnspan = 2)
 bouton_jouer.grid(row = 2, column = 1)
 bouton_quitter.grid(row = 3, column = 1)
+scroller.grid(row=4, column=1)
 
             
 fenetre_menu.mainloop()
@@ -41,7 +46,34 @@ fenetre_menu.mainloop()
 
 
 if jeu == True:
-    liste = ['AIGLE','BUSE','FAUCON','MILAN'] # avec les listes d'amina
+    LISTE_3_LETTRES = [ "ANE", "AXE", "BEL", "BIP", "CAR", "COL", "COQ", "COR", "COU", "CRI", "GAG", "GAZ", "GEL", "JUS", "NET", "NUL", "VAL", "SKI", "SOT", "TAS", "TIC"]
+    
+    LISTE_4_LETTRES= ["ETRE", "BEAU", "BETE", "BOXE", "BRUN", "CERF", "CHEZ", "CIRE", "FEMME", "DENT", "DOCK", "DODO", "DRAP", "DUNE", "FAUX", "IBIS", "JAZZ", "JOLI", "JOUE", "KAKI", "LOEO", "LOIN", "LONG", "LUNE", "LYNX", "MINE", "MURE", "OUIE", "OURS", "PION", "RHUM", "ROCK", "SEAU", "TEST", "THYM", "TROU", "TRUC", "USER", "VERT", "YOGA"]
+    
+    LISTE_5_LETTRES= ["ACCES", "AIMER", "ALOES", "ASSEZ", "AVION", "BALAI", "BANJO", "BARBE", "BONNE", "BRUIT", "BUCHE", "CACHE", "CAPOT", "CARTE", "CHIEN", "CRâNE", "CYCLE", "EBENE", "ESSAI", "GIFLE", "JAMBE", "KOALA", "LIVRE", "LOURD", "MAMAN", "MOULT", "NOEUD", "ORTIE", "PêCHE", "POIRE", "POMME", "POSTE", "PRUNE", "RADAR", "RADIS", "ROBOT", "ROUTE", "RUGBY", "SEUIL", "TAUPE", "TENUE", "TEXTE", "TYRAN", "USUEL", "VALSE"]
+    
+    LISTE_6_LETTRES= ["ACAJOU", "AGNEAU", "ALARME", "ANANAS", "ANGORA", "ANIMAL"," ARCADE", "AVIRON", "BABINE", "BALADE", "BONZAI", "BASSIN", "BILLET", "BOUCHE", "BOUCLE", "BRONZE", "CABANE", "CLOCHE", "CHEQUE", "CIRAGE", "CRAYON", "GARAGE", "GOSPEL", "GOULOT", "GRAMME", "GRELOT", "GUENON", "HOCHET", "HORMIS", "HUMOUR", "HURLER", "JARGON", "LIMITE", "LIONNE", "MENTHE", "OISEAU" , "PODIUM", "POULPE", "POUMON", "PUZZLE", "QUARTZ", "RAPIDE", "SEISME", "TETINE", "TOMATE", "WASABI", "WHISKY", "ZIPPER", "ALGERIE"]
+    
+    
+    LISTE_7_LETTRES= ["ABRITER", "BALLAST", "BARYTON", "BASSINE", "BILLARD", "BRETZEL", "CHARIOT", "CLAIRON", "CORBEAU", "CORTEGE", "CRAPAUD", "DENTIER", "DRAPEAU", "EXEMPLE", "FOURMIS", "GRANDIR", "ICEBERG", "JAVELOT" , "JOURNAL", "JOURNEE", "LOSANGE", "MACADAM", "MONDIAL", "NOTABLE", "OXYGENE", "PANIQUE", "PETROLE", "POTERIE", "POUVOIR",  "SCOOTER", "SENTEUR", "SIFFLET", "SPIRALE", "SUCETTE", "TONNEAU", "TROUSSE", "TUNIQUE", "UKULELE", "VAUTOUR", "ZOZOTER"]
+    
+    LISTE_8_LETTRES= ["AQUARIUM", "ARAIGNEE", "ARBALETE", "ARCHIPEL", "BANQUISE", "BATTERIE", "BROCANTE", "BROUHAHA", "CAPELINE", "CLAVECIN", "CLOPORTE", "DEBUTANT" , "DIAPASON", "GANGSTER", "GOTHIQUE", "HAUTBOIS", "HERISSON", "LOGICIEL", "OBJECTIF", "PARANOIA", "PARCOURS", "PASTICHE", "QUESTION", "SCARABEE", "SCORPION", "SYMPTOME", "TABOURET", "TOMAHWWK", "TOUJOURS", "TOURISME", "TRIANGLE", "UTOPIQUE", "ZEPPELIN"]
+    
+    LISTE_9_LETTRES=["ACCORDEON", "ASCENSEUR", "ASCENSION", "ASEPTISER", "AUTOROUTE", "AVALANCHE", "BALALAIKA" , "BILBOQUET", "BOURRICOT", "BRILLANCE", "CABRIOLET", "CONTRARIO", "CORNEMUSE", "DANGEREUX", "EPLUCHAGE", "FEODALITE", "FORTERESSE", "GONDOLIER", "GRAPHIQUE", "HOROSCOPE", "INTREPIDE", "KLAXONNER", "MASCARADE", "METAPHORE", "NARRATEUR", "PERIPETIE", "POPULAIRE", "PRINTEMPS", "QUEMANDER", "TAMBOURIN", "VESTIAIRE", "XYLOPHONE"]
+    
+    
+    LISTE_10_LETTRES=["ACROSTICHE", "APOCALYPSE", "ATTRACTION", "AVENTURIER", "BOUILLOTTE", "CITROUILLE", "CONTROVERSE", "COQUELICOT", "DISSIMULER" , "FLIBUSTIER", "FORESTIERE", "GRENOUILLE", "IMPOSSIBLE", "LABYRINTHE", "MAHARADJAH", "PRUDEMMENT", "QUADRICEPS" , "SOLILOQUER", "SUBJECTIVE"]
+    
+    LISTE_11_LETTREETPLUS = [ "BACCALAUREAT", "ABRACADABRA", "FRANCOPHILE", "PANDEMONIUM", "CHLOROPHYLLE" , "CONSENTEMENT" , "METALLURGIE" , "METAMORPHOSE", "MONTGOLFIERE", "KALEIDOSCOPE", "CONQUISTADOR", "CONSPIRATEUR", "RHODODENDRON", "QUALIFICATION", "PROTOZOAIRE", "QUADRILATERE", "ZYGOMATIQUE", "SORCELLERIE", "BELLIGERANT"]
+    
+
+    liste_liste= [LISTE_3_LETTRES,LISTE_4_LETTRES,LISTE_4_LETTRES,LISTE_6_LETTRES,LISTE_7_LETTRES,LISTE_8_LETTRES,LISTE_9_LETTRES,LISTE_10_LETTRES,LISTE_11_LETTREETPLUS]
+    def choisirliste(liste,entier):
+       return liste[entier+1]
+    
+    difficulte=scroller.get()+3
+    liste= choisirliste(liste_liste, difficulte)
+
 
     def mots(liste):
         element = randint(0,len(liste)-1)
