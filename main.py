@@ -56,7 +56,7 @@ fenetre_menu.mainloop()
 
 
 
-if jeu == True:
+while jeu == True:
     LISTE_3_LETTRES = [ "ANE", "AXE", "BEL", "BIP", "CAR", "COL", "COQ", "COR", "COU", "CRI", "GAG", "GAZ", "GEL", "JUS", "NET", "NUL", "VAL", "SKI", "SOT", "TAS", "TIC"]
     
     LISTE_4_LETTRES= ["ETRE", "BEAU", "BETE", "BOXE", "BRUN", "CERF", "CHEZ", "CIRE", "FEMME", "DENT", "DOCK", "DODO", "DRAP", "DUNE", "FAUX", "IBIS", "JAZZ", "JOLI", "JOUE", "KAKI", "LOEO", "LOIN", "LONG", "LUNE", "LYNX", "MINE", "MURE", "OUIE", "OURS", "PION", "RHUM", "ROCK", "SEAU", "TEST", "THYM", "TROU", "TRUC", "USER", "VERT", "YOGA"]
@@ -100,7 +100,7 @@ if jeu == True:
         global mot
         affichage=[]
         for i in range(len(mot)):
-            affichage.append('_')
+            affichage.append('*')
         return affichage
 
 
@@ -177,7 +177,10 @@ if jeu == True:
         if not(mot[i] in l_rien):
             l_rien.append(mot[i])
             nb_lettre+=1
-
+    def rejouer(ent):
+        if ent == 1:
+            jeu = True
+        else: jeu = False
 
 
     def lettre_dans_le_mot_ou_erreur(lettre):
@@ -209,7 +212,6 @@ if jeu == True:
                 messagebox.showinfo(fenetre,message="Vous avez gagné !")
                 fenetre.destroy()
         
-
         else: 
             if not(lettre in lettre_deja_donne2):
                 lettre_deja_donne2.append(lettre)
@@ -303,5 +305,17 @@ if jeu == True:
     label_lettre_deja_utilise.grid(row = 11, column=1, columnspan=3)
 
     fenetre.mainloop()
+    
+    fenetre_fin = tk.Tk() 
+    fenetre_fin.geometry("800x600+500+200") 
+    fenetre_fin.grid_rowconfigure(1, weight=1)
+    fenetre_fin.grid_rowconfigure(2, weight=1)
+    bouton_rejouer = tk.Button(fenetre_fin, text='Rejouer?', command=lambda : rejouer(1))
+    bouton_quitter = tk.Button(fenetre_fin, text='Quitter?', command=lambda : rejouer(0))
+
+    bouton_rejouer.grid(row=0, column=0)
+    bouton_quitter.grid(row=1, column=0)
+
+    fenetre_fin.mainloop()
     #
     # -----------------------------------------------------
