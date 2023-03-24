@@ -213,14 +213,13 @@ if jeu == True:
         else: 
             if not(lettre in lettre_deja_donne2):
                 lettre_deja_donne2.append(lettre)
-            change_label_deja(lettre)
-            print("Faux")
+                change_label_deja(lettre)
+                print("Faux")
+                erreur +=1
+                creer_lignes(liste_ligne, erreur, canvas_personnage)
             if erreur >= 11:
                 messagebox.showinfo(fenetre,message="Vous avez perdu !")
                 fenetre.destroy()
-            else: 
-                erreur +=1
-                creer_lignes(liste_ligne, erreur, canvas_personnage)
 
 
 
