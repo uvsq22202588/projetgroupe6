@@ -75,8 +75,9 @@ while jeu == True:
     
     LISTE_10_LETTRES=["ACROSTICHE", "APOCALYPSE", "ATTRACTION", "AVENTURIER", "BOUILLOTTE", "CITROUILLE", "CONTROVERSE", "COQUELICOT", "DISSIMULER" , "FLIBUSTIER", "FORESTIERE", "GRENOUILLE", "IMPOSSIBLE", "LABYRINTHE", "MAHARADJAH", "PRUDEMMENT", "QUADRICEPS" , "SOLILOQUER", "SUBJECTIVE"]
     
-    LISTE_11_LETTREETPLUS = [ "BACCALAUREAT", "ABRACADABRA", "FRANCOPHILE", "PANDEMONIUM", "CHLOROPHYLLE" , "CONSENTEMENT" , "METALLURGIE" , "METAMORPHOSE", "MONTGOLFIERE", "KALEIDOSCOPE", "CONQUISTADOR", "CONSPIRATEUR", "RHODODENDRON", "QUALIFICATION", "PROTOZOAIRE", "QUADRILATERE", "ZYGOMATIQUE", "SORCELLERIE", "BELLIGERANT"]
+    LISTE_11_LETTREETPLUS = [ "BACCALAUREAT", "ABRACADABRA", "FRANCOPHILE", "PANDEMONIUM", "CHLOROPHYLLE" , "CONSENTEMENT" , "METALLURGIE" , "METAMORPHOSE", "MONTGOLFIERE", "KALEIDOSCOPE", "CONQUISTADOR", "CONSPIRATEUR", "RHODODENDRON", "QUALIFICATION", "PROTOZOAIRE", "QUADRILATERE", "ZYGOMATIQUE", "SORCELLERIE", "BELLIGERANT","ANTICONSTITUTIONNELLEMENT"]
     
+   #source mots : "http://www.idees-gages.com/mots-jeu-pendu.php" 
 
     liste_liste= [LISTE_3_LETTRES,LISTE_4_LETTRES,LISTE_4_LETTRES,LISTE_6_LETTRES,LISTE_7_LETTRES,LISTE_8_LETTRES,LISTE_9_LETTRES,LISTE_10_LETTRES,LISTE_11_LETTREETPLUS]
     def choisirliste(liste,entier):
@@ -94,6 +95,29 @@ while jeu == True:
 
     mot = mots(liste)
     print(mot)
+
+
+    def aide():
+
+        regles_jeu = tk.Toplevel()
+        regles_jeu.geometry("800x300")
+        regles_jeu.title("Regles du jeu")
+        zone_texte1 = tk.Label (regles_jeu, text = "Le jeu du pendu est un jeu de devinettes où un joueur doit deviner un mot en proposant des lettres. Voici les règles de base du jeu :")
+        zone_texte2= tk.Label (regles_jeu, text = "1. Le joueur doit deviner le mot en proposant des lettres une à une.")
+        zone_texte3 = tk.Label (regles_jeu, text = "2. Si une lettre proposée est dans le mot, elle est révélée dans le mot.")
+        zone_texte4= tk.Label (regles_jeu, text = "3. Si une lettre proposée n'est pas dans le mot, un élément est ajouté au dessin du pendu.")
+        zone_texte5 = tk.Label (regles_jeu, text = "4.Le joueur a un nombre limité de propositions avant que le dessin ne soit complété (10 erreurs sont autorisées).")
+        zone_texte6 = tk.Label (regles_jeu, text = "6.Si le joueur devine le mot avant que le dessin ne soit complété, il gagne. Sinon, il perd.")
+        zone_texte1.grid(sticky="nw")
+        zone_texte2.grid(sticky="nw")
+        zone_texte3.grid(sticky="nw")
+        zone_texte4.grid(sticky="nw")
+        zone_texte5.grid(sticky="nw")
+        zone_texte6.grid(sticky="nw")
+        boutton_compris=tk.Button(regles_jeu, text="J'ai compris", command= regles_jeu.destroy)
+        boutton_compris.grid(sticky="s")
+
+        regles_jeu.mainloop
 
 
     def tiret():
@@ -304,6 +328,10 @@ while jeu == True:
     label_pointille.grid(row = 11, column=0)
     label_lettre_deja_utilise.grid(row = 11, column=1, columnspan=3)
 
+    #bouton d'aide 
+    bouton_aide= tk.Button(fenetre, text="Aide", command=aide, bg="cyan")
+    bouton_aide.grid(sticky="sw")
+
     fenetre.mainloop()
     
     fenetre_fin = tk.Tk() 
@@ -317,5 +345,3 @@ while jeu == True:
     bouton_quitter.grid(row=1, column=0)
 
     fenetre_fin.mainloop()
-    #
-    # -----------------------------------------------------
