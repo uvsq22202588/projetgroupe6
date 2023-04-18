@@ -6,10 +6,19 @@ import tkinter as tk
 from tkinter import messagebox
 import tkinter.font as font
 
+
+def parse_line( ligne , sep, colonne, type) :
+    li = ligne.split(sep)
+    if type == "int" :
+        return(int(li[colonne]))
+    elif type == "str" :
+        return(li[colonne])
+mote=""
+chrge = False
+
 jeu = False
 
 fenetre_menu = tk.Tk()
-messagebox.showinfo(fenetre_menu,message="Si vous êtes sur mac, il est possible que l'affichage soit un peu moche du style tout noir")
 fenetre_menu.geometry("800x500+400+200")
 fenetre_menu.grid_columnconfigure(0, weight=1)
 fenetre_menu.grid_columnconfigure(1, weight=1)
@@ -19,6 +28,7 @@ fenetre_menu.grid_rowconfigure(1, weight=1)
 fenetre_menu.grid_rowconfigure(2, weight=1)
 fenetre_menu.grid_rowconfigure(3, weight=1)
 fenetre_menu.grid_rowconfigure(4, weight=1)
+fenetre_menu.grid_rowconfigure(5, weight=1)
 font_label = font.Font(size=20)
 font_bouton = font.Font(size=15)
 font_label2 = font.Font(size=16)
@@ -32,6 +42,27 @@ def je(n = None):
         difficulte=scroller.get()
     fenetre_menu.destroy()
 
+def charger():
+    global mote
+    global score
+    global chrge
+    chrge = True
+    path = "C:/Users/Administrateur/Desktop/save.csv"
+    mode = "r"
+    csv_save = open(path, mode)
+    ligne = csv_save.readline()
+    mote = parse_line(ligne, ",", 0, "str")
+    score = parse_line(ligne, ",", 1, "int")
+    csv_save.close()
+    je()
+
+def mots(liste):
+    element = randint(0,len(liste)-1)
+    mot = liste[element]
+    return mot
+
+
+score = 0
 Label_1 = tk.Label(fenetre_menu, text="Jeu du Pendu", fg = "black")
 Label_1['font'] = font_label
 Label_2 = tk.Label(fenetre_menu, text="difficulté :")
@@ -42,14 +73,17 @@ scroller=tk.Scale(fenetre_menu ,from_=0, to=8, orient="horizontal")
 
 bouton_jouer = tk.Button(fenetre_menu, text="Jouer", command=lambda : je())
 bouton_quitter = tk.Button(fenetre_menu, text="Quitter", command=lambda : je(1))
+bouton_charger = tk.Button(fenetre_menu, text="Charger", command= charger)
 bouton_jouer['font'] = font_bouton
 bouton_quitter['font'] = font_bouton
+bouton_charger['font'] = font_bouton
 
 Label_1.grid(row = 1, column = 1)
 bouton_jouer.grid(row = 2, column = 1)
 bouton_quitter.grid(row = 3, column = 1)
-Label_2.grid(row=4, column=0)
-scroller.grid(row=4, column=1)
+bouton_charger.grid(row = 4, column = 1)
+Label_2.grid(row=5, column=0)
+scroller.grid(row=5, column=1)
 
             
 fenetre_menu.mainloop()
@@ -63,7 +97,7 @@ while jeu == True:
     
     LISTE_5_LETTRES= ["ACCES", "AIMER", "ALOES", "ASSEZ", "AVION", "BALAI", "BANJO", "BARBE", "BONNE", "BRUIT", "BUCHE", "CACHE", "CAPOT", "CARTE", "CHIEN", "CRâNE", "CYCLE", "EBENE", "ESSAI", "GIFLE", "JAMBE", "KOALA", "LIVRE", "LOURD", "MAMAN", "MOULT", "NOEUD", "ORTIE", "PêCHE", "POIRE", "POMME", "POSTE", "PRUNE", "RADAR", "RADIS", "ROBOT", "ROUTE", "RUGBY", "SEUIL", "TAUPE", "TENUE", "TEXTE", "TYRAN", "USUEL", "VALSE"]
     
-    LISTE_6_LETTRES= ["ACAJOU", "AGNEAU", "ALARME", "ANANAS", "ANGORA", "ANIMAL"," ARCADE", "AVIRON", "BABINE", "BALADE", "BONZAI", "BASSIN", "BILLET", "BOUCHE", "BOUCLE", "BRONZE", "CABANE", "CLOCHE", "CHEQUE", "CIRAGE", "CRAYON", "GARAGE", "GOSPEL", "GOULOT", "GRAMME", "GRELOT", "GUENON", "HOCHET", "HORMIS", "HUMOUR", "HURLER", "JARGON", "LIMITE", "LIONNE", "MENTHE", "OISEAU" , "PODIUM", "POULPE", "POUMON", "PUZZLE", "QUARTZ", "RAPIDE", "SEISME", "TETINE", "TOMATE", "WASABI", "WHISKY", "ZIPPER", "ALGERIE"]
+    LISTE_6_LETTRES= ["ACAJOU", "AGNEAU", "ALARME", "ANANAS", "ANGORA", "ANIMAL","ARCADE", "AVIRON", "BABINE", "BALADE", "BONZAI", "BASSIN", "BILLET", "BOUCHE", "BOUCLE", "BRONZE", "CABANE", "CLOCHE", "CHEQUE", "CIRAGE", "CRAYON", "GARAGE", "GOSPEL", "GOULOT", "GRAMME", "GRELOT", "GUENON", "HOCHET", "HORMIS", "HUMOUR", "HURLER", "JARGON", "LIMITE", "LIONNE", "MENTHE", "OISEAU" , "PODIUM", "POULPE", "POUMON", "PUZZLE", "QUARTZ", "RAPIDE", "SEISME", "TETINE", "TOMATE", "WASABI", "WHISKY", "ZIPPER", "ALGERIE"]
     
     
     LISTE_7_LETTRES= ["ABRITER", "BALLAST", "BARYTON", "BASSINE", "BILLARD", "BRETZEL", "CHARIOT", "CLAIRON", "CORBEAU", "CORTEGE", "CRAPAUD", "DENTIER", "DRAPEAU", "EXEMPLE", "FOURMIS", "GRANDIR", "ICEBERG", "JAVELOT" , "JOURNAL", "JOURNEE", "LOSANGE", "MACADAM", "MONDIAL", "NOTABLE", "OXYGENE", "PANIQUE", "PETROLE", "POTERIE", "POUVOIR",  "SCOOTER", "SENTEUR", "SIFFLET", "SPIRALE", "SUCETTE", "TONNEAU", "TROUSSE", "TUNIQUE", "UKULELE", "VAUTOUR", "ZOZOTER"]
@@ -75,9 +109,8 @@ while jeu == True:
     
     LISTE_10_LETTRES=["ACROSTICHE", "APOCALYPSE", "ATTRACTION", "AVENTURIER", "BOUILLOTTE", "CITROUILLE", "CONTROVERSE", "COQUELICOT", "DISSIMULER" , "FLIBUSTIER", "FORESTIERE", "GRENOUILLE", "IMPOSSIBLE", "LABYRINTHE", "MAHARADJAH", "PRUDEMMENT", "QUADRICEPS" , "SOLILOQUER", "SUBJECTIVE"]
     
-    LISTE_11_LETTREETPLUS = [ "BACCALAUREAT", "ABRACADABRA", "FRANCOPHILE", "PANDEMONIUM", "CHLOROPHYLLE" , "CONSENTEMENT" , "METALLURGIE" , "METAMORPHOSE", "MONTGOLFIERE", "KALEIDOSCOPE", "CONQUISTADOR", "CONSPIRATEUR", "RHODODENDRON", "QUALIFICATION", "PROTOZOAIRE", "QUADRILATERE", "ZYGOMATIQUE", "SORCELLERIE", "BELLIGERANT","ANTICONSTITUTIONNELLEMENT"]
+    LISTE_11_LETTREETPLUS = [ "BACCALAUREAT", "ABRACADABRA", "FRANCOPHILE", "PANDEMONIUM", "CHLOROPHYLLE" , "CONSENTEMENT" , "METALLURGIE" , "METAMORPHOSE", "MONTGOLFIERE", "KALEIDOSCOPE", "CONQUISTADOR", "CONSPIRATEUR", "RHODODENDRON", "QUALIFICATION", "PROTOZOAIRE", "QUADRILATERE", "ZYGOMATIQUE", "SORCELLERIE", "BELLIGERANT"]
     
-   #source mots : "http://www.idees-gages.com/mots-jeu-pendu.php" 
 
     liste_liste= [LISTE_3_LETTRES,LISTE_4_LETTRES,LISTE_4_LETTRES,LISTE_6_LETTRES,LISTE_7_LETTRES,LISTE_8_LETTRES,LISTE_9_LETTRES,LISTE_10_LETTRES,LISTE_11_LETTREETPLUS]
     def choisirliste(liste,entier):
@@ -87,18 +120,14 @@ while jeu == True:
     liste = choisirliste(liste_liste, difficulte)
 
 
-    def mots(liste):
-        element = randint(0,len(liste)-1)
-        mot = liste[element]
-        return mot
+    if chrge:
+        mot = mote
+    else:
+        mot = mots(liste)
 
-
-    mot = mots(liste)
-    print(mot)
-
-
+    
     def aide():
-
+        
         regles_jeu = tk.Toplevel()
         regles_jeu.geometry("800x300")
         regles_jeu.title("Regles du jeu")
@@ -106,8 +135,8 @@ while jeu == True:
         zone_texte2= tk.Label (regles_jeu, text = "1. Le joueur doit deviner le mot en proposant des lettres une à une.")
         zone_texte3 = tk.Label (regles_jeu, text = "2. Si une lettre proposée est dans le mot, elle est révélée dans le mot.")
         zone_texte4= tk.Label (regles_jeu, text = "3. Si une lettre proposée n'est pas dans le mot, un élément est ajouté au dessin du pendu.")
-        zone_texte5 = tk.Label (regles_jeu, text = "4.Le joueur a un nombre limité de propositions avant que le dessin ne soit complété (10 erreurs sont autorisées).")
-        zone_texte6 = tk.Label (regles_jeu, text = "6.Si le joueur devine le mot avant que le dessin ne soit complété, il gagne. Sinon, il perd.")
+        zone_texte5 = tk.Label (regles_jeu, text = "4. Le joueur a un nombre limité de propositions avant que le dessin ne soit complété (10 erreurs sont autorisées).")
+        zone_texte6 = tk.Label (regles_jeu, text = "5. Si le joueur devine le mot avant que le dessin ne soit complété, il gagne. Sinon, il perd.")
         zone_texte1.grid(sticky="nw")
         zone_texte2.grid(sticky="nw")
         zone_texte3.grid(sticky="nw")
@@ -118,6 +147,9 @@ while jeu == True:
         boutton_compris.grid(sticky="s")
 
         regles_jeu.mainloop
+
+    
+    print(mot)
 
 
     def tiret():
@@ -138,10 +170,21 @@ while jeu == True:
         print(pos_x,pos_y)
 
 
+    def deviner_le_mt(mot1):
+        global erreur
+        mot1 = mot1.upper()
+        if mot == mot1:
+            messagebox.showinfo(fenetre,message="Vous avez gagné !")
+            fenetre.destroy()
+        else:
+            erreur+=1
+            creer_lignes(liste_ligne, erreur, canvas_personnage)
+
+
 
     fenetre = tk.Tk()
     fenetre.title("pendu")
-    fenetre.geometry("800x500+400+200")
+    fenetre.geometry("800x600+400+200")
 
     mot_pointille = tiret()
 
@@ -152,7 +195,13 @@ while jeu == True:
     label_erreur = tk.Label(fenetre, text="Vous avez fait "+str(erreur)+" erreur(s)")
     label_lettre_deja_utilise = tk.Label(fenetre, text="Vous n'avez utilisé aucune lettre : ")
 
+    entre = tk.Entry(fenetre,width=10,font = ("helvetica", "10"))
+
+    button_pour_mot = tk.Button(fenetre, text="Deviner le mot ?", command= lambda:deviner_le_mt(entre.get()))
+
     reussite = 0
+    label_score = tk.Label(fenetre, text = "score : "+str(score))
+
 
 
     def change_label_deja(lett):
@@ -164,12 +213,15 @@ while jeu == True:
 
     def change_label_erreur():
         global erreur
+        global score
         label_erreur.config(text="Vous avez fait "+str(erreur)+" erreur(s)")
+        label_score.config(text="score : "+str(score))
         fenetre.after(10, change_label_erreur)
 
-
-
     change_label_erreur()
+
+
+
 
     liste_ligne=[[100,400,400,400],[150,400,150,150],[150,150,300,150],[200,150,150,200],[300,150,300,200],[325,250,275,200],[ 300,250,300,300],[300,275,325,275],[275,275,325,275],   [300,300,325,320],[300,300,275,320]]
 
@@ -201,11 +253,38 @@ while jeu == True:
         if not(mot[i] in l_rien):
             l_rien.append(mot[i])
             nb_lettre+=1
-    def rejouer(ent):
+
+    def rejouer(ent,fen):
+        global jeu
         if ent == 1:
             jeu = True
         else: jeu = False
+        fen.destroy()
 
+    fenetre.grid_rowconfigure(13, weight=1)
+
+
+    def sauvegarder():
+        global mot
+        global score
+        path = "C:/Users/Administrateur/Desktop/save.csv"
+        mode = "w"
+        csv_save = open(path, mode)
+        csv_save.write(mot+","+str(score)+"\n")
+        csv_save.close()
+    
+    bouton_save = tk.Button(fenetre, text="sauvegarder", command=sauvegarder)
+    
+    def indications():
+        global mot
+        indice_rand = randint(0,len(mot)-1)
+        lettre_rand = mot[indice_rand]
+        while lettre_rand in lettre_deja_donne:
+            indice_rand = randint(0,len(mot)-1)
+            lettre_rand = mot[indice_rand]
+        messagebox.showinfo(fenetre,message="Dans le mot, il y a la lettre, "+str(lettre_rand))
+        
+    bouton_indication = tk.Button(fenetre, command = indications,text="Indice pour le mot")
 
     def lettre_dans_le_mot_ou_erreur(lettre):
         global mot
@@ -216,7 +295,7 @@ while jeu == True:
         global reussite
         global lettre_deja_donne
         global nb_lettre
-
+        global score
         if lettre in mot:
             for i in range(len(mot)):
                 if mot[i] == lettre:
@@ -236,13 +315,14 @@ while jeu == True:
                 messagebox.showinfo(fenetre,message="Vous avez gagné !")
                 fenetre.destroy()
         
-        else: 
+        else:
+            
             if not(lettre in lettre_deja_donne2):
                 lettre_deja_donne2.append(lettre)
                 change_label_deja(lettre)
-                print("Faux")
                 erreur +=1
                 creer_lignes(liste_ligne, erreur, canvas_personnage)
+                score += 1
             if erreur >= 11:
                 messagebox.showinfo(fenetre,message="Vous avez perdu !")
                 fenetre.destroy()
@@ -293,9 +373,9 @@ while jeu == True:
     #canvas_personnage.create_line(275,275,325,275,fill="black")
     #canvas_personnage.create_line(300,300,325,320,fill="black")
     #canvas_personnage.create_line(300,300,275,320,fill="black")
+    bouton_aide= tk.Button(fenetre, text="Aide", command=aide, bg="cyan")
+    bouton_aide.grid(sticky="nw")
 
-
-    canvas_personnage.bind("<Button-1>",ecrit_les_coords)
     boutonA.grid(column=1,row=0)
     boutonB.grid(column=1,row=1)
     boutonC.grid(column=1,row=2)
@@ -327,21 +407,23 @@ while jeu == True:
     label_erreur.grid(row=10,column=0)
     label_pointille.grid(row = 11, column=0)
     label_lettre_deja_utilise.grid(row = 11, column=1, columnspan=3)
-
-    #bouton d'aide 
-    bouton_aide= tk.Button(fenetre, text="Aide", command=aide, bg="cyan")
-    bouton_aide.grid(sticky="sw")
+    entre.grid(row= 13, column=0)
+    bouton_indication.grid(row = 13, column=1)
+    button_pour_mot.grid(row= 14, column=0)
+    label_score.grid(row = 14, column=1)
+    bouton_save.grid(row = 14, column=4)
 
     fenetre.mainloop()
     
     fenetre_fin = tk.Tk() 
-    fenetre_fin.geometry("800x600+500+200") 
+    fenetre_fin.geometry("100x100+500+200") 
     fenetre_fin.grid_rowconfigure(1, weight=1)
     fenetre_fin.grid_rowconfigure(2, weight=1)
-    bouton_rejouer = tk.Button(fenetre_fin, text='Rejouer?', command=lambda : rejouer(1))
-    bouton_quitter = tk.Button(fenetre_fin, text='Quitter?', command=lambda : rejouer(0))
-
+    bouton_rejouer = tk.Button(fenetre_fin, text='Rejouer?', command=lambda : rejouer(1,fenetre_fin))
+    bouton_quitter = tk.Button(fenetre_fin, text='Quitter?', command=lambda : rejouer(0,fenetre_fin))
     bouton_rejouer.grid(row=0, column=0)
     bouton_quitter.grid(row=1, column=0)
 
     fenetre_fin.mainloop()
+    #
+    # -----------------------------------------------------
