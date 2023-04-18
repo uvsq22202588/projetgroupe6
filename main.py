@@ -5,7 +5,27 @@ from random import randint
 import tkinter as tk
 from tkinter import messagebox
 import tkinter.font as font
+def aide():
+        
+        regles_jeu = tk.Toplevel()
+        regles_jeu.geometry("800x300")
+        regles_jeu.title("Regles du jeu")
+        zone_texte1 = tk.Label (regles_jeu, text = "Le jeu du pendu est un jeu de devinettes où un joueur doit deviner un mot en proposant des lettres. Voici les règles de base du jeu :")
+        zone_texte2= tk.Label (regles_jeu, text = "1. Le joueur doit deviner le mot en proposant des lettres une à une.")
+        zone_texte3 = tk.Label (regles_jeu, text = "2. Si une lettre proposée est dans le mot, elle est révélée dans le mot.")
+        zone_texte4= tk.Label (regles_jeu, text = "3. Si une lettre proposée n'est pas dans le mot, un élément est ajouté au dessin du pendu.")
+        zone_texte5 = tk.Label (regles_jeu, text = "4. Le joueur a un nombre limité de propositions avant que le dessin ne soit complété (10 erreurs sont autorisées).")
+        zone_texte6 = tk.Label (regles_jeu, text = "5. Si le joueur devine le mot avant que le dessin ne soit complété, il gagne. Sinon, il perd.")
+        zone_texte1.grid(sticky="nw")
+        zone_texte2.grid(sticky="nw")
+        zone_texte3.grid(sticky="nw")
+        zone_texte4.grid(sticky="nw")
+        zone_texte5.grid(sticky="nw")
+        zone_texte6.grid(sticky="nw")
+        boutton_compris=tk.Button(regles_jeu, text="J'ai compris", command= regles_jeu.destroy)
+        boutton_compris.grid(sticky="s")
 
+        regles_jeu.mainloop
 
 def parse_line( ligne , sep, colonne, type) :
     li = ligne.split(sep)
@@ -71,6 +91,9 @@ Label_2['font'] = font_label2
 scroller=tk.Scale(fenetre_menu ,from_=0, to=8, orient="horizontal")
 
 
+bouton_aide= tk.Button(fenetre_menu, text="Aide", command=aide, bg="cyan")
+bouton_aide['font'] = font_bouton
+bouton_aide.grid(sticky="nw")
 bouton_jouer = tk.Button(fenetre_menu, text="Jouer", command=lambda : je())
 bouton_quitter = tk.Button(fenetre_menu, text="Quitter", command=lambda : je(1))
 bouton_charger = tk.Button(fenetre_menu, text="Charger", command= charger)
@@ -126,27 +149,7 @@ while jeu == True:
         mot = mots(liste)
 
     
-    def aide():
-        
-        regles_jeu = tk.Toplevel()
-        regles_jeu.geometry("800x300")
-        regles_jeu.title("Regles du jeu")
-        zone_texte1 = tk.Label (regles_jeu, text = "Le jeu du pendu est un jeu de devinettes où un joueur doit deviner un mot en proposant des lettres. Voici les règles de base du jeu :")
-        zone_texte2= tk.Label (regles_jeu, text = "1. Le joueur doit deviner le mot en proposant des lettres une à une.")
-        zone_texte3 = tk.Label (regles_jeu, text = "2. Si une lettre proposée est dans le mot, elle est révélée dans le mot.")
-        zone_texte4= tk.Label (regles_jeu, text = "3. Si une lettre proposée n'est pas dans le mot, un élément est ajouté au dessin du pendu.")
-        zone_texte5 = tk.Label (regles_jeu, text = "4. Le joueur a un nombre limité de propositions avant que le dessin ne soit complété (10 erreurs sont autorisées).")
-        zone_texte6 = tk.Label (regles_jeu, text = "5. Si le joueur devine le mot avant que le dessin ne soit complété, il gagne. Sinon, il perd.")
-        zone_texte1.grid(sticky="nw")
-        zone_texte2.grid(sticky="nw")
-        zone_texte3.grid(sticky="nw")
-        zone_texte4.grid(sticky="nw")
-        zone_texte5.grid(sticky="nw")
-        zone_texte6.grid(sticky="nw")
-        boutton_compris=tk.Button(regles_jeu, text="J'ai compris", command= regles_jeu.destroy)
-        boutton_compris.grid(sticky="s")
-
-        regles_jeu.mainloop
+    
 
     
     print(mot)
@@ -373,8 +376,6 @@ while jeu == True:
     #canvas_personnage.create_line(275,275,325,275,fill="black")
     #canvas_personnage.create_line(300,300,325,320,fill="black")
     #canvas_personnage.create_line(300,300,275,320,fill="black")
-    bouton_aide= tk.Button(fenetre, text="Aide", command=aide, bg="cyan")
-    bouton_aide.grid(sticky="nw")
 
     boutonA.grid(column=1,row=0)
     boutonB.grid(column=1,row=1)
