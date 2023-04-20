@@ -5,6 +5,9 @@ from random import randint
 import tkinter as tk
 from tkinter import messagebox
 import tkinter.font as font
+from PIL import Image
+from PIL import ImageTk
+
 def aide():
         
         regles_jeu = tk.Toplevel()
@@ -88,6 +91,9 @@ Label_1['font'] = font_label
 Label_2 = tk.Label(fenetre_menu, text="difficulté :")
 Label_2['font'] = font_label2
 
+image_pendu=ImageTk.PhotoImage(Image.open("pendu.png"))
+label_image_pendu=tk.Label(fenetre_menu,image=image_pendu)
+
 scroller=tk.Scale(fenetre_menu ,from_=0, to=8, orient="horizontal")
 
 
@@ -106,6 +112,7 @@ bouton_jouer.grid(row = 2, column = 1)
 bouton_quitter.grid(row = 3, column = 1)
 bouton_charger.grid(row = 4, column = 1)
 Label_2.grid(row=5, column=0)
+label_image_pendu.grid(row=1,column=1)
 scroller.grid(row=5, column=1)
 
             
@@ -175,13 +182,18 @@ while jeu == True:
 
     def deviner_le_mt(mot1):
         global erreur
-        mot1 = mot1.upper()
-        if mot == mot1:
-            messagebox.showinfo(fenetre,message="Vous avez gagné !")
-            fenetre.destroy()
+        if erreur<10:
+            mot1 = mot1.upper()
+            if mot == mot1:
+                    messagebox.showinfo(fenetre,message="Vous avez gagné !")
+                    fenetre.destroy()
+            else:
+                erreur+=1
+                creer_lignes(liste_ligne, erreur, canvas_personnage)
         else:
-            erreur+=1
-            creer_lignes(liste_ligne, erreur, canvas_personnage)
+            messagebox.showinfo(fenetre,message="Vous avez perdu !")
+            fenetre.destroy()
+        
 
 
 
@@ -305,6 +317,60 @@ while jeu == True:
         global lettre_deja_donne
         global nb_lettre
         global score
+        if lettre == "A":
+            boutonA.grid_forget()
+        if lettre == "B":
+            boutonB.grid_forget()
+        if lettre == "C":
+            boutonC.grid_forget()
+        if lettre == "D":
+            boutonD.grid_forget()
+        if lettre == "D":
+            boutonD.grid_forget()
+        if lettre == "E":
+            boutonE.grid_forget()
+        if lettre == "F":
+            boutonF.grid_forget()
+        if lettre == "G":
+            boutonG.grid_forget()
+        if lettre == "H":
+            boutonH.grid_forget()
+        if lettre == "I":
+            boutonI.grid_forget()
+        if lettre == "J":
+            boutonJ.grid_forget()
+        if lettre == "K":
+            boutonK.grid_forget()
+        if lettre == "M":
+            boutonL.grid_forget()
+        if lettre == "M":
+            boutonM.grid_forget()
+        if lettre == "N":
+            boutonN.grid_forget()
+        if lettre == "O":
+            boutonO.grid_forget()
+        if lettre == "P":
+            boutonP.grid_forget()
+        if lettre == "Q":
+            boutonQ.grid_forget()
+        if lettre == "R":
+            boutonR.grid_forget()
+        if lettre == "S":
+            boutonS.grid_forget()
+        if lettre == "T":
+            boutonT.grid_forget()
+        if lettre == "U":
+            boutonU.grid_forget()
+        if lettre == "V":
+            boutonV.grid_forget()
+        if lettre == "W":
+            boutonW.grid_forget()
+        if lettre == "X":
+            boutonX.grid_forget()
+        if lettre == "Y":
+            boutonY.grid_forget()
+        if lettre == "Z":
+            boutonZ.grid_forget()
         if lettre in mot:
             for i in range(len(mot)):
                 if mot[i] == lettre:
@@ -424,13 +490,28 @@ while jeu == True:
     fenetre.mainloop()
     
     fenetre_fin = tk.Tk() 
-    fenetre_fin.geometry("100x100+500+200") 
+    fenetre_fin.geometry("500x400+400+200") 
     fenetre_fin.grid_rowconfigure(1, weight=1)
     fenetre_fin.grid_rowconfigure(2, weight=1)
     bouton_rejouer = tk.Button(fenetre_fin, text='Rejouer?', command=lambda : rejouer(1,fenetre_fin))
     bouton_quitter = tk.Button(fenetre_fin, text='Quitter?', command=lambda : rejouer(0,fenetre_fin))
     bouton_rejouer.grid(row=0, column=0)
     bouton_quitter.grid(row=1, column=0)
+
+    scroller=tk.Scale(fenetre_fin ,from_=0, to=8, orient="horizontal")
+    
+    if erreur<11:
+        photo=ImageTk.PhotoImage(Image.open("image_winning_Petite.png"))
+        #https://i.imgflip.com/4/14gn1c.jpgc
+    if erreur>=11:
+        photo=ImageTk.PhotoImage(Image.open("image_losing_Petite.png"))
+        #https://www.jeuxactu.com/datas/jeux/g/t/gta-5/vn/gta-5-5258ef057bf49.jpg
+    label_photo=tk.Label(fenetre_fin,image=photo)
+    label_photo.grid(row=0, column=3)
+    Label=tk.Label(fenetre_fin,text="Difficulté :")
+    Label.grid(row=2, column=2)
+
+    scroller.grid(row=2, column=3)
 
     fenetre_fin.mainloop()
     #
