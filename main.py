@@ -292,6 +292,7 @@ while jeu == True:
         while lettre_rand in lettre_deja_donne:
             indice_rand = randint(0,len(mot)-1)
             lettre_rand = mot[indice_rand]
+        bouton_indication.grid_forget()
         messagebox.showinfo(fenetre,message="Dans le mot, il y a la lettre, "+str(lettre_rand))
         
     bouton_indication = tk.Button(fenetre, command = indications,text="Indice pour le mot")
@@ -306,6 +307,60 @@ while jeu == True:
         global lettre_deja_donne
         global nb_lettre
         global score
+        if lettre == "A":
+            boutonA.grid_forget()
+        if lettre == "B":
+            boutonB.grid_forget()
+        if lettre == "C":
+            boutonC.grid_forget()
+        if lettre == "D":
+            boutonD.grid_forget()
+        if lettre == "D":
+            boutonD.grid_forget()
+        if lettre == "E":
+            boutonE.grid_forget()
+        if lettre == "F":
+            boutonF.grid_forget()
+        if lettre == "G":
+            boutonG.grid_forget()
+        if lettre == "H":
+            boutonH.grid_forget()
+        if lettre == "I":
+            boutonI.grid_forget()
+        if lettre == "J":
+            boutonJ.grid_forget()
+        if lettre == "K":
+            boutonK.grid_forget()
+        if lettre == "M":
+            boutonL.grid_forget()
+        if lettre == "M":
+            boutonM.grid_forget()
+        if lettre == "N":
+            boutonN.grid_forget()
+        if lettre == "O":
+            boutonO.grid_forget()
+        if lettre == "P":
+            boutonP.grid_forget()
+        if lettre == "Q":
+            boutonQ.grid_forget()
+        if lettre == "R":
+            boutonR.grid_forget()
+        if lettre == "S":
+            boutonS.grid_forget()
+        if lettre == "T":
+            boutonT.grid_forget()
+        if lettre == "U":
+            boutonU.grid_forget()
+        if lettre == "V":
+            boutonV.grid_forget()
+        if lettre == "W":
+            boutonW.grid_forget()
+        if lettre == "X":
+            boutonX.grid_forget()
+        if lettre == "Y":
+            boutonY.grid_forget()
+        if lettre == "Z":
+            boutonZ.grid_forget()
         if lettre in mot:
             for i in range(len(mot)):
                 if mot[i] == lettre:
