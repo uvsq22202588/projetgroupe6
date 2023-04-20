@@ -471,7 +471,7 @@ while jeu == True:
     canvas_personnage.grid(row=0, column=0, rowspan=10,columnspan=6)
     label_erreur.grid(row=0,column=7)
     label_pointille.grid(row = 1, column=7)
-    label_lettre_deja_utilise.grid(row = 2, column=6, columnspan=3) # il faut griser les lettres utilisées sinon ca sort de la fenetre
+    label_lettre_deja_utilise.grid(row = 2, column=6, columnspan=3) 
     entre.grid(row= 7, column=6)
     bouton_indication.grid(row = 5, column=7)
     button_pour_mot.grid(row= 7, column=7)
@@ -487,7 +487,7 @@ while jeu == True:
     fenetre_fin.geometry("100x100+500+200") 
     fenetre_fin.grid_rowconfigure(1, weight=1)
     fenetre_fin.grid_rowconfigure(2, weight=1)
-    bouton_rejouer = tk.Button(fenetre_fin, text='Rejouer ?', command=lambda : rejouer(1,fenetre_fin))
+    bouton_rejouer = tk.Button(fenetre_fin, text= 'Rejouer ?', command=lambda : rejouer(1,fenetre_fin))
     bouton_quitter = tk.Button(fenetre_fin, text='Quitter ?', command=lambda : rejouer(0,fenetre_fin))
     bouton_rejouer.grid(row=0, column=0)
     bouton_quitter.grid(row=1, column=0)
