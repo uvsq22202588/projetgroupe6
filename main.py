@@ -1,3 +1,5 @@
+# FICHIER DU GROUPE AMINA, ANDREA, LENNY, RASSIM, JEU DU PENDU
+# --------------------------------------
 
 from random import randint
 import tkinter as tk
@@ -15,7 +17,7 @@ def aide():
         zone_texte3 = tk.Label (regles_jeu, text = "2. Si une lettre proposée est dans le mot, elle est révélée dans le mot.")
         zone_texte4= tk.Label (regles_jeu, text = "3. Si la lettre proposée n'est pas dans le mot, une partie du dessin d’un pendu apparait.")
         zone_texte5 = tk.Label (regles_jeu, text = "4. Le joueur a le droit a 10 propositions fausses avant que le dessin ne soit complété. Un seul indice est proposé")
-        zone_texte6 = tk.Label (regles_jeu, text = "5. Si le dessin du pendu est entierement dessine avant que le mot ne soit devine, il perd. Sinon, il gagne.")
+        zone_texte6 = tk.Label (regles_jeu, text = "5. Si le dessin du pendu est entierement dessine avant que le mot ne soit deviné, il perd. Sinon, il gagne.")
         zone_texte1.grid(sticky="nw")
         zone_texte2.grid(sticky="nw")
         zone_texte3.grid(sticky="nw")
@@ -176,13 +178,17 @@ while jeu == True:
 
     def deviner_le_mt(mot1):
         global erreur
-        mot1 = mot1.upper()
-        if mot == mot1:
-            messagebox.showinfo(fenetre,message="Vous avez gagné !")
-            fenetre.destroy()
+        if erreur<10:
+            mot1 = mot1.upper()
+            if mot == mot1:
+                messagebox.showinfo(fenetre,message="Vous avez gagné !")
+                fenetre.destroy()
+            else:
+                erreur+=1
+                creer_lignes(liste_ligne, erreur, canvas_personnage)
         else:
-            erreur+=1
-            creer_lignes(liste_ligne, erreur, canvas_personnage)
+            messagebox.showinfo(fenetre,message="Vous avez perdu !")
+            fenetre.destroy()
 
 
 
@@ -213,7 +219,7 @@ while jeu == True:
         cdc = ''
         for lettre in lettre_deja_donne2:
             cdc = cdc + lettre + ", " 
-        label_lettre_deja_utilise.config(text="Vous avez déjà utilisé les lettres : "+cdc)
+        label_lettre_deja_utilise.config(text="Vous avez utilisé les lettres : \n "+cdc)
 
     def change_label_erreur():
         global erreur
