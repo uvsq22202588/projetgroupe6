@@ -5,8 +5,8 @@ from random import randint
 import tkinter as tk
 from tkinter import messagebox
 import tkinter.font as font
-from PIL import Image
-from PIL import ImageTk
+#import PIL as pil
+#from PIL import ImageTk
 
 def aide():
         
@@ -88,11 +88,11 @@ def mots(liste):
 score = 0
 Label_1 = tk.Label(fenetre_menu, text="Jeu du Pendu", fg = "black")
 Label_1['font'] = font_label
-Label_2 = tk.Label(fenetre_menu, text="difficulté :")
+Label_2 = tk.Label(fenetre_menu, text="Choisis ta difficulté :")
 Label_2['font'] = font_label2
 
-image_pendu=ImageTk.PhotoImage(Image.open("pendu.png"))
-label_image_pendu=tk.Label(fenetre_menu,image=image_pendu)
+#image=ImageTk.PhotoImage(Image.open("pendu.jpg") )
+#label_photo=tk.Label(fenetre_menu,img=image)
 
 scroller=tk.Scale(fenetre_menu ,from_=0, to=8, orient="horizontal")
 
@@ -102,17 +102,17 @@ bouton_aide['font'] = font_bouton
 bouton_aide.grid(sticky="nw")
 bouton_jouer = tk.Button(fenetre_menu, text="Jouer", command=lambda : je())
 bouton_quitter = tk.Button(fenetre_menu, text="Quitter", command=lambda : je(1))
-bouton_charger = tk.Button(fenetre_menu, text="Charger", command= charger)
+bouton_charger = tk.Button(fenetre_menu, text="Charger une partie ", command= charger)
 bouton_jouer['font'] = font_bouton
 bouton_quitter['font'] = font_bouton
 bouton_charger['font'] = font_bouton
 
 Label_1.grid(row = 1, column = 1)
-bouton_jouer.grid(row = 2, column = 1)
-bouton_quitter.grid(row = 3, column = 1)
-bouton_charger.grid(row = 4, column = 1)
+bouton_jouer.grid(row = 4, column = 1)
+bouton_quitter.grid(row = 5, column = 3)
+bouton_charger.grid(row = 0, column = 3)
 Label_2.grid(row=5, column=0)
-label_image_pendu.grid(row=1,column=1)
+#label_photo.grid(row=1,column=1)
 scroller.grid(row=5, column=1)
 
             
@@ -182,24 +182,19 @@ while jeu == True:
 
     def deviner_le_mt(mot1):
         global erreur
-        if erreur<10:
-            mot1 = mot1.upper()
-            if mot == mot1:
-                    messagebox.showinfo(fenetre,message="Vous avez gagné !")
-                    fenetre.destroy()
-            else:
-                erreur+=1
-                creer_lignes(liste_ligne, erreur, canvas_personnage)
-        else:
-            messagebox.showinfo(fenetre,message="Vous avez perdu !")
+        mot1 = mot1.upper()
+        if mot == mot1:
+            messagebox.showinfo(fenetre,message="Vous avez gagné !")
             fenetre.destroy()
-        
+        else:
+            erreur+=1
+            creer_lignes(liste_ligne, erreur, canvas_personnage)
 
 
 
     fenetre = tk.Tk()
     fenetre.title("pendu")
-    fenetre.geometry("1000x600+200+100")
+    fenetre.geometry("820x555+400+200")
 
     mot_pointille = tiret()
 
@@ -214,10 +209,8 @@ while jeu == True:
 
     button_pour_mot = tk.Button(fenetre, text="Deviner le mot ?", command= lambda:deviner_le_mt(entre.get()))
 
-    indicee = False
     reussite = 0
-    fenetre.resizable(width = False, height = False)
-    label_score = tk.Label(fenetre, text = "score : "+str(score))
+    label_score = tk.Label(fenetre, text = "Score : "+str(score))
 
 
 
@@ -232,7 +225,7 @@ while jeu == True:
         global erreur
         global score
         label_erreur.config(text="Vous avez fait "+str(erreur)+" erreur(s)")
-        label_score.config(text="score : "+str(score))
+        label_score.config(text="Score : "+str(score))
         fenetre.after(10, change_label_erreur)
 
     change_label_erreur()
@@ -290,22 +283,19 @@ while jeu == True:
         csv_save.write(mot+","+str(score)+"\n")
         csv_save.close()
     
-    bouton_save = tk.Button(fenetre, text="sauvegarder", command=sauvegarder)
+    bouton_save = tk.Button(fenetre, text="Sauvegarder", command=sauvegarder)
     
     def indications():
-        global indicee
         global mot
-        global bouton_indication
         indice_rand = randint(0,len(mot)-1)
         lettre_rand = mot[indice_rand]
         while lettre_rand in lettre_deja_donne:
             indice_rand = randint(0,len(mot)-1)
             lettre_rand = mot[indice_rand]
-        indicee = True
         bouton_indication.grid_forget()
         messagebox.showinfo(fenetre,message="Dans le mot, il y a la lettre, "+str(lettre_rand))
-    bouton_indication = tk.Button(fenetre, command = indications,text="Indice pour le mot")
         
+    bouton_indication = tk.Button(fenetre, command = indications,text="Indice pour le mot")
 
     def lettre_dans_le_mot_ou_erreur(lettre):
         global mot
@@ -432,6 +422,9 @@ while jeu == True:
     boutonY=tk.Button(fenetre,text="Y",command=lambda : lettre_dans_le_mot_ou_erreur("Y"))
     boutonZ=tk.Button(fenetre,text="Z",command=lambda : lettre_dans_le_mot_ou_erreur("Z"))
 
+    bouton_quit=tk.Button(fenetre,text='Quitter',command=lambda : fenetre.destroy())
+    
+
     #print(mot_pointille)
     #lettre_dans_le_mot("m")
     #gprint(mot_pointille)
@@ -449,69 +442,57 @@ while jeu == True:
     #canvas_personnage.create_line(300,300,325,320,fill="black")
     #canvas_personnage.create_line(300,300,275,320,fill="black")
 
-    boutonA.grid(column=1,row=0)
-    boutonB.grid(column=1,row=1)
-    boutonC.grid(column=1,row=2)
-    boutonD.grid(column=1,row=3)
-    boutonE.grid(column=1,row=4)
-    boutonF.grid(column=1,row=5)
-    boutonG.grid(column=1,row=6)
-    boutonH.grid(column=1,row=7)
-    boutonI.grid(column=1,row=8)
-    boutonJ.grid(column=1,row=9)
-    boutonK.grid(column=2,row=0)
-    boutonL.grid(column=2,row=1)
-    boutonM.grid(column=2,row=2)
-    boutonN.grid(column=2,row=3)
-    boutonO.grid(column=2,row=4)
-    boutonP.grid(column=2,row=5)
-    boutonQ.grid(column=2,row=6)
-    boutonR.grid(column=2,row=7)
-    boutonS.grid(column=2,row=8)
-    boutonT.grid(column=2,row=9)
-    boutonU.grid(column=3,row=0)
-    boutonV.grid(column=3,row=1)
-    boutonW.grid(column=3,row=2)
-    boutonX.grid(column=3,row=3)
-    boutonY.grid(column=3,row=4)
-    boutonZ.grid(column=3,row=5) 
+  
+    boutonA.grid(column=0,row=10)
+    boutonB.grid(column=1,row=10)
+    boutonC.grid(column=2,row=10)
+    boutonD.grid(column=3,row=10)
+    boutonE.grid(column=4,row=10)
+    boutonF.grid(column=5,row=10)
+    boutonG.grid(column=0,row=11)
+    boutonH.grid(column=1,row=11)
+    boutonI.grid(column=2,row=11)
+    boutonJ.grid(column=3,row=11)
+    boutonK.grid(column=4,row=11)
+    boutonL.grid(column=5,row=11)
+    boutonM.grid(column=0,row=12)
+    boutonN.grid(column=1,row=12)
+    boutonO.grid(column=2,row=12)
+    boutonP.grid(column=3,row=12)
+    boutonQ.grid(column=4,row=12)
+    boutonR.grid(column=5,row=12)
+    boutonS.grid(column=0,row=13)
+    boutonT.grid(column=1,row=13)
+    boutonU.grid(column=2,row=13)
+    boutonV.grid(column=3,row=13)
+    boutonW.grid(column=4,row=13)
+    boutonX.grid(column=5,row=13)
+    boutonY.grid(column=2,row=14)
+    boutonZ.grid(column=3,row=14) 
 
-    canvas_personnage.grid(row=0, column=0, rowspan=10)
-    label_erreur.grid(row=10,column=0)
-    label_pointille.grid(row = 11, column=0)
-    label_lettre_deja_utilise.grid(row = 11, column=1, columnspan=3)
-    entre.grid(row= 13, column=0)
-    if not indicee:
-        bouton_indication.grid(row = 13, column=1)
-    button_pour_mot.grid(row= 14, column=0)
-    label_score.grid(row = 14, column=1)
-    bouton_save.grid(row = 14, column=4)
+    canvas_personnage.grid(row=0, column=0, rowspan=10,columnspan=6)
+    label_erreur.grid(row=0,column=7)
+    label_pointille.grid(row = 1, column=7)
+    label_lettre_deja_utilise.grid(row = 2, column=6, columnspan=3) # il faut griser les lettres utilisées sinon ca sort de la fenetre
+    entre.grid(row= 7, column=6)
+    bouton_indication.grid(row = 5, column=7)
+    button_pour_mot.grid(row= 7, column=7)
+    label_score.grid(row=9,column=6)
+    bouton_save.grid(row = 9, column=7)
+    bouton_quit.grid(row=14,column=10)
+
+    fenetre.resizable(width = False, height = False)
 
     fenetre.mainloop()
     
     fenetre_fin = tk.Tk() 
-    fenetre_fin.geometry("500x400+400+200") 
+    fenetre_fin.geometry("100x100+500+200") 
     fenetre_fin.grid_rowconfigure(1, weight=1)
     fenetre_fin.grid_rowconfigure(2, weight=1)
-    bouton_rejouer = tk.Button(fenetre_fin, text='Rejouer?', command=lambda : rejouer(1,fenetre_fin))
-    bouton_quitter = tk.Button(fenetre_fin, text='Quitter?', command=lambda : rejouer(0,fenetre_fin))
+    bouton_rejouer = tk.Button(fenetre_fin, text='Rejouer ?', command=lambda : rejouer(1,fenetre_fin))
+    bouton_quitter = tk.Button(fenetre_fin, text='Quitter ?', command=lambda : rejouer(0,fenetre_fin))
     bouton_rejouer.grid(row=0, column=0)
     bouton_quitter.grid(row=1, column=0)
-
-    scroller=tk.Scale(fenetre_fin ,from_=0, to=8, orient="horizontal")
-    
-    if erreur<11:
-        photo=ImageTk.PhotoImage(Image.open("image_winning_Petite.png"))
-        #https://i.imgflip.com/4/14gn1c.jpgc
-    if erreur>=11:
-        photo=ImageTk.PhotoImage(Image.open("image_losing_Petite.png"))
-        #https://www.jeuxactu.com/datas/jeux/g/t/gta-5/vn/gta-5-5258ef057bf49.jpg
-    label_photo=tk.Label(fenetre_fin,image=photo)
-    label_photo.grid(row=0, column=3)
-    Label=tk.Label(fenetre_fin,text="Difficulté :")
-    Label.grid(row=2, column=2)
-
-    scroller.grid(row=2, column=3)
 
     fenetre_fin.mainloop()
     #
