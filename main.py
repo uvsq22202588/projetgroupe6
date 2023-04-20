@@ -89,8 +89,6 @@ Label_1['font'] = font_label
 Label_2 = tk.Label(fenetre_menu, text="Choisis ta difficulté :")
 Label_2['font'] = font_label2
 
-#image=ImageTk.PhotoImage(Image.open("pendu.jpg") )
-#label_photo=tk.Label(fenetre_menu,img=image)
 
 scroller=tk.Scale(fenetre_menu ,from_=0, to=8, orient="horizontal")
 
@@ -110,7 +108,6 @@ bouton_jouer.grid(row = 4, column = 1)
 bouton_quitter.grid(row = 5, column = 3)
 bouton_charger.grid(row = 0, column = 3)
 Label_2.grid(row=5, column=0)
-#label_photo.grid(row=1,column=1)
 scroller.grid(row=5, column=1)
 
             
