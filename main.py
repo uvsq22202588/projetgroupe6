@@ -3,8 +3,7 @@ from random import randint
 import tkinter as tk
 from tkinter import messagebox
 import tkinter.font as font
-#import PIL as pil
-#from PIL import ImageTk
+
 
 def aide():
         
