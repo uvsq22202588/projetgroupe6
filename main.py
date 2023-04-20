@@ -13,12 +13,12 @@ def aide():
         regles_jeu = tk.Toplevel()
         regles_jeu.geometry("800x300")
         regles_jeu.title("Regles du jeu")
-        zone_texte1 = tk.Label (regles_jeu, text = "Le jeu du pendu est un jeu de devinettes où un joueur doit deviner un mot en proposant des lettres. Voici les règles de base du jeu :")
+        zone_texte1 = tk.Label (regles_jeu, text = "Le jeu du pendu est un jeu de société où un joueur doit deviner un mot en appuyant sur les lettres.Les règles de base du jeu sont:")
         zone_texte2= tk.Label (regles_jeu, text = "1. Le joueur doit deviner le mot en proposant des lettres une à une.")
         zone_texte3 = tk.Label (regles_jeu, text = "2. Si une lettre proposée est dans le mot, elle est révélée dans le mot.")
-        zone_texte4= tk.Label (regles_jeu, text = "3. Si une lettre proposée n'est pas dans le mot, un élément est ajouté au dessin du pendu.")
-        zone_texte5 = tk.Label (regles_jeu, text = "4. Le joueur a un nombre limité de propositions avant que le dessin ne soit complété (10 erreurs sont autorisées).")
-        zone_texte6 = tk.Label (regles_jeu, text = "5. Si le joueur devine le mot avant que le dessin ne soit complété, il gagne. Sinon, il perd.")
+        zone_texte4= tk.Label (regles_jeu, text = "3. Si la lettre proposée n'est pas dans le mot, une partie du dessin d’un pendu apparait.")
+        zone_texte5 = tk.Label (regles_jeu, text = "4. Le joueur a le droit a 10 propositions fausses avant que le dessin ne soit complété. Un seul indice est proposé")
+        zone_texte6 = tk.Label (regles_jeu, text = "5. Si le dessin du pendu est entierement dessine avant que le mot ne soit devine, il perd. Sinon, il gagne.")
         zone_texte1.grid(sticky="nw")
         zone_texte2.grid(sticky="nw")
         zone_texte3.grid(sticky="nw")
@@ -98,7 +98,7 @@ label_image_pendu=tk.Label(fenetre_menu,image=image_pendu)
 scroller=tk.Scale(fenetre_menu ,from_=0, to=8, orient="horizontal")
 
 
-bouton_aide= tk.Button(fenetre_menu, text="Aide", command=aide, bg="cyan")
+bouton_aide= tk.Button(fenetre_menu, text="Aide", command=aide)
 bouton_aide['font'] = font_bouton
 bouton_aide.grid(sticky="nw")
 bouton_jouer = tk.Button(fenetre_menu, text="Jouer", command=lambda : je())
@@ -319,8 +319,6 @@ while jeu == True:
             boutonC.grid_forget()
         if lettre == "D":
             boutonD.grid_forget()
-        if lettre == "D":
-            boutonD.grid_forget()
         if lettre == "E":
             boutonE.grid_forget()
         if lettre == "F":
@@ -335,7 +333,7 @@ while jeu == True:
             boutonJ.grid_forget()
         if lettre == "K":
             boutonK.grid_forget()
-        if lettre == "M":
+        if lettre == "L":
             boutonL.grid_forget()
         if lettre == "M":
             boutonM.grid_forget()
